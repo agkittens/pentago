@@ -24,17 +24,21 @@ bool Game::checkDraw(int player, Board board) {
 				// left subboard is full H
 				if (grid[i][j] != '_' 
 					&& grid[i][j] == grid[i][j + 1] 
-					== grid[i][j + 2] == grid[i + 1][j] 
-					== grid[i + 1][j + 1]) {
+					&& grid[i][j] == grid[i][j + 2] 
+					&& grid[i][j] == grid[i + 1][j]
+					&& grid[i][j] == grid[i + 1][j + 1]) {
 					isGameOver = true;
+					std::cout << "\player: " << playerName[currentPlayer] << "wins";
 				}
 
 				// right subboard is full H
 				if (grid[i][j+1] != '_'
 					&& grid[i][j + 1] == grid[i][j + 2]
-					== grid[i + 1][j] == grid[i + 1][j + 1]
-					== grid[i + 1][j + 2]) {
+					&& grid[i][j + 1] == grid[i + 1][j] 
+					&& grid[i][j + 1] == grid[i + 1][j + 1]
+					&& grid[i][j + 1] == grid[i + 1][j + 2]) {
 					isGameOver = true;
+					std::cout << "\player: " << playerName[currentPlayer] << "wins";
 				}
 			}
 		}
@@ -46,17 +50,21 @@ bool Game::checkDraw(int player, Board board) {
 				// up subboard is full V
 				if (grid[i][j] != '_'
 					&& grid[i][j] == grid[i][j + 3]
-					== grid[i][j + 6] == grid[i + 2][j]
-					== grid[i + 2][j + 3]) {
+					&& grid[i][j] == grid[i][j + 6] 
+					&& grid[i][j] == grid[i + 2][j]
+					&& grid[i][j] == grid[i + 2][j + 3]) {
 					isGameOver = true;
+					std::cout << "\player: " << playerName[currentPlayer] << "wins";
 				}
 
 				// down subboard is full V
 				if (grid[i][j + 3] != '_'
 					&& grid[i][j + 3] == grid[i][j + 6]
-					== grid[i + 2][j] == grid[i + 2][j + 3]
-					== grid[i + 2][j + 6]) {
+					&& grid[i][j] == grid[i + 2][j] 
+					&& grid[i][j] == grid[i + 2][j + 3]
+					&& grid[i][j] == grid[i + 2][j + 6]) {
 					isGameOver = true;
+					std::cout << "\player: " << playerName[currentPlayer] << "wins";
 				}
 			}
 		}
@@ -66,7 +74,7 @@ bool Game::checkDraw(int player, Board board) {
 
 
 	if (isGameOver) {
-		std::cout << "press enter to leave game" << std::endl;
+		std::cout << "\npress enter to leave game" << std::endl;
 		while (true) {
 			if (std::cin.get() == '\n') return true;
 		}

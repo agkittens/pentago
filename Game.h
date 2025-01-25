@@ -7,6 +7,7 @@
 class Game {
 public:
 	int currentPlayer = 0;
+	std::string playerName[2] = { "","" };
 
 	bool checkDraw(int player, Board board);
 	void changeTurn();

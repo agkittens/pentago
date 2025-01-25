@@ -13,7 +13,7 @@ public:
 
 	void addPieceAt(int subboard, int posX, int posY, int player);
 	void rotateSubboard(int subboard, int direction);
-	void drawBoard();
+	void drawWindow(std::string playerName[], int currentPlayer);
 	bool ifAllFieldsFull();
 
 	char getPieceFrom(int subboard, int pos);

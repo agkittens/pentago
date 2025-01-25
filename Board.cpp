@@ -8,15 +8,24 @@ Board::Board() {
 	grid.resize(SUBBOARDS_NUM, std::vector<char>(SUBBOARD_SIZE * SUBBOARD_SIZE, '_'));
 }
 
-void Board::drawBoard() {
+void Board::drawWindow(std::string playerName[], int currentPlayer) {
 	clearWindow();
-	std::cout << "\033[0;14H" << "PENTAGO" << std::endl;
+	std::cout << "\033[38;5;206m";
+	std::cout << "\033[2;7H" << "   ___  ___ ___  / /____ ____ ____ ";
+	std::cout << "\033[3;7H" << "  / _ \\/ -_) _ \\/ __/ _ `/ _ `/ _ \\";
+	std::cout << "\033[4;7H" << " / .__/\\__/_//_/\\__/\\_,_/\\_, /\\___/";
+	std::cout << "\033[5;7H" << "/_/                     /___/      ";
+	std::cout << "\033[0m";
+
+	//std::cout << "\033[0;14H" <<  "\033[38;5;206m" << "PENTAGO" << "\033[0m" << std::endl;
+	std::cout << "\033[25;2H" << "\033[38;5;206m" << "Player1: " << "\033[0m" << playerName[0] << "; is current? " << ((currentPlayer == 0) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
+	std::cout << "\033[26;2H" << "\033[38;5;206m" << "Player2: " << "\033[0m" << playerName[1] << "; is current? " << ((currentPlayer == 1) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
 
 	for (int i = 0; i < SUBBOARDS_NUM; i++) {
 		//\033[row;columnH
-		std::stringstream ss;
-		auto column = 2 + (i % 2) * 17;
-		auto row = 2 + ((i < 2) ? 0 : 1) * 4;
+		std::stringstream ss; 
+		auto column = 8 + (i % 2) * 17;
+		auto row = 6 + ((i < 2) ? 0 : 1) * 4;
 
 		for (int field = 0; field < SUBBOARD_SIZE * SUBBOARD_SIZE; field++) {
 			if (field % 3 == 0) {
