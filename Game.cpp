@@ -7,7 +7,7 @@ bool Game::checkDraw(int player, Board board) {
 	bool ifBoardFull = board.ifAllFieldsFull();
 
 	if (ifBoardFull) {
-		std::cout << "\ngame over, nobody wins" << std::endl;
+		std::cout << "\033[38;5;171m" << "\ngame over, nobody wins" << "\033[0m";
 		isGameOver = true;
 	}
 
@@ -28,7 +28,7 @@ bool Game::checkDraw(int player, Board board) {
 					&& grid[i][j] == grid[i + 1][j]
 					&& grid[i][j] == grid[i + 1][j + 1]) {
 					isGameOver = true;
-					std::cout << "\player: " << playerName[currentPlayer] << "wins";
+					std::cout << "\033[38;5;171m" << "\player: " << playerName[currentPlayer] << " wins" << "\033[0m";
 				}
 
 				// right subboard is full H
@@ -38,7 +38,7 @@ bool Game::checkDraw(int player, Board board) {
 					&& grid[i][j + 1] == grid[i + 1][j + 1]
 					&& grid[i][j + 1] == grid[i + 1][j + 2]) {
 					isGameOver = true;
-					std::cout << "\player: " << playerName[currentPlayer] << "wins";
+					std::cout << "\033[38;5;171m" << "\player: " << playerName[currentPlayer] << " wins" << "\033[0m";
 				}
 			}
 		}
@@ -54,7 +54,7 @@ bool Game::checkDraw(int player, Board board) {
 					&& grid[i][j] == grid[i + 2][j]
 					&& grid[i][j] == grid[i + 2][j + 3]) {
 					isGameOver = true;
-					std::cout << "\player: " << playerName[currentPlayer] << "wins";
+					std::cout << "\033[38;5;171m" << "\player: " << playerName[currentPlayer] << " wins" << "\033[0m";
 				}
 
 				// down subboard is full V
@@ -64,7 +64,7 @@ bool Game::checkDraw(int player, Board board) {
 					&& grid[i][j] == grid[i + 2][j + 3]
 					&& grid[i][j] == grid[i + 2][j + 6]) {
 					isGameOver = true;
-					std::cout << "\player: " << playerName[currentPlayer] << "wins";
+					std::cout << "\033[38;5;171m" << "\player: " << playerName[currentPlayer] << " wins" << "\033[0m";
 				}
 			}
 		}
