@@ -18,23 +18,19 @@ int main() {
 		std::getline(std::cin,input);
 		std::istringstream iss(input);
 		iss >> subboard >> separator >> posX >> separator >> posY;
-		board.addPieceAt(subboard, (3*posX+posY), 0);
+		board.addPieceAt(subboard, posX, posY, game.currentPlayer);
 
 		board.drawBoard();
 
 		std::cout << "\nrotate board (board, rotation(90 or -90))" << std::endl;
 		std::getline(std::cin, input);
+		iss.clear();
+		iss.str(input);
 		iss >> subboard >> separator >> rotation;
 		board.rotateSubboard(subboard, rotation);
 
-		if (game.checkDraw(0, board)) {
-			std::cout << "press enter to leave game" << std::endl;
-
-			while (true) {
-				if (std::cin.get() == '\n') return 0;
-			}
-			
-		}
+		if (game.checkDraw(0, board)) return 0;
+		game.changeTurn();
 	}
 
 	return 0;

@@ -6,7 +6,10 @@
 
 class Game {
 public:
+	int currentPlayer = 0;
+
 	bool checkDraw(int player, Board board);
+	void changeTurn();
 };
 
 #endif

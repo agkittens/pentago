@@ -10,6 +10,7 @@ Board::Board() {
 
 void Board::drawBoard() {
 	clearWindow();
+	std::cout << "\033[0;14H" << "PENTAGO" << std::endl;
 
 	for (int i = 0; i < SUBBOARDS_NUM; i++) {
 		//\033[row;columnH
@@ -31,7 +32,8 @@ void Board::drawBoard() {
 }
 
 void Board::rotateSubboard(int subboard, int direction) {
-	if (subboard < 0 || subboard >3) return;
+	if (subboard < 0 || subboard > 3) { std::cout << "\nwrong subboard"; if (std::cin.get() == '\n') return; }
+	if (direction != -90 && direction != 90) { std::cout << "\nwrong direction angle"; if (std::cin.get() == '\n') return; }
 
 	std::map<int, int> rotateValues;
 	auto gridCopy = grid[subboard];
@@ -61,14 +63,19 @@ char Board::getPieceFrom(int subboard, int pos) {
 	return grid[subboard].at(pos);
 }
 
-void Board::addPieceAt(int subboard, int pos, int player) {
-	if (subboard < 0 || subboard >3) return;
+void Board::addPieceAt(int subboard, int posX, int posY, int player) {
+	if (subboard < 0 || subboard > 3) {std::cout << "\nwrong subboard"; if (std::cin.get() == '\n') return; }
+	if (posX < 0 || posX > 2) {std::cout << "\wrong position x"; if (std::cin.get() == '\n') return; }
+	if (posY < 0 || posY > 2) {std::cout << "\wrong position y"; if (std::cin.get() == '\n') return; }
+
+	auto pos = (3 * posX + posY);
 
 	if (grid[subboard].at(pos) == '_') {
 		switch (player) {
-		case 0: grid[subboard][pos] = 'o';
-		case 1: grid[subboard][pos] = 'x';
+		case 0: grid[subboard][pos] = 'o'; break;
+		case 1: grid[subboard][pos] = 'x'; break;
 		}
+		placedElements++;
 	}
 }
 
@@ -84,4 +91,16 @@ bool Board::ifAllFieldsFull() {
 
 	if (counter == fieldsNum) return true;
 	return false;
+}
+
+int Board::getSubboardSize() {
+	return SUBBOARD_SIZE;
+}
+
+int Board::getSubboardsNum() {
+	return SUBBOARDS_NUM;
+}
+
+std::vector<std::vector<char>> Board::getGrid() {
+	return grid;
 }

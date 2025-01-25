@@ -8,16 +8,21 @@
 class Board {
 public:
 	Board();
-	void addPieceAt(int subboard, int pos, int player);
+
+	int placedElements = 0;
+
+	void addPieceAt(int subboard, int posX, int posY, int player);
 	void rotateSubboard(int subboard, int direction);
 	void drawBoard();
 	bool ifAllFieldsFull();
 
 	char getPieceFrom(int subboard, int pos);
+	int getSubboardSize();
+	int getSubboardsNum();
+	std::vector<std::vector<char>>getGrid();
 
 private:
 	std::vector<std::vector<char>> grid;
-	const int BOARD_SIZE = 6;
 	const int SUBBOARD_SIZE = 3;
 	const int SUBBOARDS_NUM = 4;
 
