@@ -6,6 +6,8 @@
 class Game {
 public:
 	Game();
-};
+
+	void checkDraw();
+	};
 
 #endif
