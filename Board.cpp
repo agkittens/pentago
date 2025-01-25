@@ -1,4 +1,4 @@
-#include "Board.h";
+﻿#include "Board.h";
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -12,21 +12,25 @@ void Board::drawBoard() {
 	for (int i = 0; i < SUBBOARDS_NUM; i++) {
 		//\033[row;columnH
 		std::stringstream ss;
-		auto column = 2 + (i % 2) * 15;
+		auto column = 2 + (i % 2) * 17;
 		auto row = 2 + ((i < 2) ? 0 : 1) * 4;
 
-		ss << "\033[" << row << ";" << column << "H";
-		auto terminalPosition = ss.str();
-		std::cout << terminalPosition;
-
 		for (int field = 0; field < SUBBOARD_SIZE * SUBBOARD_SIZE; field++) {
-
-			switch (field % 3) {
-			case 0: std::cout << "\n| " << getPieceFrom(i, field) << " |";
-			case 1 && 2: std::cout << "| " << getPieceFrom(i, field) << " |";
+			if (field % 3 == 0) {
+				++row;
+				ss << "\033[" << row << ";" << column << "H";
+				auto terminalPosition = ss.str();
+				std::cout << terminalPosition;
 			}
+			std::cout << "| " << getPieceFrom(i, field) << " |";
 		}
 	}
+	std::cout << "\n";
+
+}
+
+void Board::clearWindow() {
+	std::cout << "\033[2J";
 }
 
 char Board::getPieceFrom(int subboard, int pos) {

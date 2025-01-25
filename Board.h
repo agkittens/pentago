@@ -10,6 +10,7 @@ public:
 	void addPieceAt(int subboard, int pos, int player);
 	void rotateSubboard(int subboardNum, int direction);
 	void drawBoard();
+	void clearWindow();
 
 	char getPieceFrom(int subboard, int pos);
 
