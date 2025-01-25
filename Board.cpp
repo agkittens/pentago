@@ -28,7 +28,6 @@ void Board::drawBoard() {
 		}
 	}
 	std::cout << "\n";
-
 }
 
 void Board::rotateSubboard(int subboard, int direction) {
@@ -71,4 +70,18 @@ void Board::addPieceAt(int subboard, int pos, int player) {
 		case 1: grid[subboard][pos] = 'x';
 		}
 	}
+}
+
+bool Board::ifAllFieldsFull() {
+	auto counter = 0;
+	auto fieldsNum = SUBBOARDS_NUM * SUBBOARD_SIZE * SUBBOARD_SIZE;
+
+	for (int i = 0; i < SUBBOARDS_NUM; i++) {
+		for (int j = 0; j < SUBBOARD_SIZE * SUBBOARD_SIZE; j++) {
+			if (grid[i][j] != '_') counter++;
+		}
+	}
+
+	if (counter == fieldsNum) return true;
+	return false;
 }

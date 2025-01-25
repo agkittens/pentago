@@ -11,6 +11,7 @@ public:
 	void addPieceAt(int subboard, int pos, int player);
 	void rotateSubboard(int subboard, int direction);
 	void drawBoard();
+	bool ifAllFieldsFull();
 
 	char getPieceFrom(int subboard, int pos);
 

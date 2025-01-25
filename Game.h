@@ -2,12 +2,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Board.h"
 
 class Game {
 public:
-	Game();
-
-	void checkDraw();
-	};
+	bool checkDraw(int player, Board board);
+};
 
 #endif
