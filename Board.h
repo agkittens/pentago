@@ -27,6 +27,7 @@ private:
 	const int SUBBOARDS_NUM = 4;
 
 	void clearWindow();
+	std::string movePosition(int row, int column);
 };
 
 #endif

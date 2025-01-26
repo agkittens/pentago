@@ -22,7 +22,7 @@ bool Game::checkDraw(int player, Board board) {
 			for (int j = 0; j < subboardSize * subboardSize; j+=3) {
 
 				// left subboard is full H
-				if (grid[i][j] != '_' 
+				if (grid[i][j] != ' ' 
 					&& grid[i][j] == grid[i][j + 1] 
 					&& grid[i][j] == grid[i][j + 2] 
 					&& grid[i][j] == grid[i + 1][j]
@@ -32,7 +32,7 @@ bool Game::checkDraw(int player, Board board) {
 				}
 
 				// right subboard is full H
-				if (grid[i][j+1] != '_'
+				if (grid[i][j+1] != ' '
 					&& grid[i][j + 1] == grid[i][j + 2]
 					&& grid[i][j + 1] == grid[i + 1][j] 
 					&& grid[i][j + 1] == grid[i + 1][j + 1]
@@ -48,7 +48,7 @@ bool Game::checkDraw(int player, Board board) {
 			for (int j = 0; j < subboardSize ; j ++) {
 
 				// up subboard is full V
-				if (grid[i][j] != '_'
+				if (grid[i][j] != ' '
 					&& grid[i][j] == grid[i][j + 3]
 					&& grid[i][j] == grid[i][j + 6] 
 					&& grid[i][j] == grid[i + 2][j]
@@ -58,7 +58,7 @@ bool Game::checkDraw(int player, Board board) {
 				}
 
 				// down subboard is full V
-				if (grid[i][j + 3] != '_'
+				if (grid[i][j + 3] != ' '
 					&& grid[i][j + 3] == grid[i][j + 6]
 					&& grid[i][j] == grid[i + 2][j] 
 					&& grid[i][j] == grid[i + 2][j + 3]

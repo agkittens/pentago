@@ -5,7 +5,7 @@
 #include <map>
 
 Board::Board() {
-	grid.resize(SUBBOARDS_NUM, std::vector<char>(SUBBOARD_SIZE * SUBBOARD_SIZE, '_'));
+	grid.resize(SUBBOARDS_NUM, std::vector<char>(SUBBOARD_SIZE * SUBBOARD_SIZE, ' '));
 }
 
 void Board::drawWindow(std::string playerName[], int currentPlayer) {
@@ -18,26 +18,36 @@ void Board::drawWindow(std::string playerName[], int currentPlayer) {
 	std::cout << "\033[0m";
 
 	//std::cout << "\033[0;14H" <<  "\033[38;5;206m" << "PENTAGO" << "\033[0m" << std::endl;
-	std::cout << "\033[25;2H" << "\033[38;5;206m" << "Player1: " << "\033[0m" << playerName[0] << "; is current? " << ((currentPlayer == 0) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
-	std::cout << "\033[26;2H" << "\033[38;5;206m" << "Player2: " << "\033[0m" << playerName[1] << "; is current? " << ((currentPlayer == 1) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
+	std::cout << "\033[28;2H" << "\033[38;5;206m" << "Player1: " << "\033[0m" << playerName[0] << "; is current? " << ((currentPlayer == 0) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
+	std::cout << "\033[29;2H" << "\033[38;5;206m" << "Player2: " << "\033[0m" << playerName[1] << "; is current? " << ((currentPlayer == 1) ? "\033[38;5;171mtrue" : "false") << "\033[0m";
 
 	for (int i = 0; i < SUBBOARDS_NUM; i++) {
 		//\033[row;columnH
-		std::stringstream ss; 
-		auto column = 8 + (i % 2) * 17;
-		auto row = 6 + ((i < 2) ? 0 : 1) * 4;
+		auto column = 10 + (i % 2) * 15;
+		auto row = 6 + ((i < 2) ? 0 : 1) * 7;
+		auto temp = row;
+
+		std::cout << movePosition(++temp, column) << "┌───┬───┬───┐";
+		std::cout << movePosition(++temp, column) << "│   │   │   │";
+		std::cout << movePosition(++temp, column) << "├───┼───┼───┤";
+		std::cout << movePosition(++temp, column) << "│   │   │   │";
+		std::cout << movePosition(++temp, column) << "├───┼───┼───┤";
+		std::cout << movePosition(++temp, column) << "│   │   │   │";
+		std::cout << movePosition(++temp, column) << "└───┴───┴───┘";
+
+		column += 2;
 
 		for (int field = 0; field < SUBBOARD_SIZE * SUBBOARD_SIZE; field++) {
 			if (field % 3 == 0) {
-				++row;
-				ss << "\033[" << row << ";" << column << "H";
-				auto terminalPosition = ss.str();
-				std::cout << terminalPosition;
+				row += 2;
+				if (field != 0) column -= 12;
 			}
-			std::cout << "| " << getPieceFrom(i, field) << " |";
+			
+			std::cout << movePosition(row, column) << getPieceFrom(i, field);
+			column += 4;
 		}
 	}
-	std::cout << "\n";
+	std::cout << "\n\n";
 }
 
 void Board::rotateSubboard(int subboard, int direction) {
@@ -68,6 +78,12 @@ void Board::clearWindow() {
 	std::cout << "\033[2J";
 }
 
+std::string Board::movePosition(int row, int column) {
+	std::stringstream ss;
+	ss << "\033[" << row << ";" << column << "H";
+	return ss.str();
+}
+
 char Board::getPieceFrom(int subboard, int pos) {
 	return grid[subboard].at(pos);
 }
@@ -79,7 +95,7 @@ void Board::addPieceAt(int subboard, int posX, int posY, int player) {
 
 	auto pos = (3 * posX + posY);
 
-	if (grid[subboard].at(pos) == '_') {
+	if (grid[subboard].at(pos) == ' ') {
 		switch (player) {
 		case 0: grid[subboard][pos] = 'o'; break;
 		case 1: grid[subboard][pos] = 'x'; break;
@@ -94,7 +110,7 @@ bool Board::ifAllFieldsFull() {
 
 	for (int i = 0; i < SUBBOARDS_NUM; i++) {
 		for (int j = 0; j < SUBBOARD_SIZE * SUBBOARD_SIZE; j++) {
-			if (grid[i][j] != '_') counter++;
+			if (grid[i][j] != ' ') counter++;
 		}
 	}
 
