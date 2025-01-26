@@ -1,7 +1,5 @@
 # pentago
-6x6 tic tac toe but with a twist
-
-Here's a possible description for the README.md file of your Pentago game project:
+6x6 tic tac toe but with a twist, it is a console game, make sure to enbale utf-8 characters
 
 ## features:
 ### game Logic:
