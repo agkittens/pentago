@@ -11,6 +11,9 @@ public:
 
 	bool checkDraw(int player, Board board);
 	void changeTurn();
+
+private:
+	bool checkCondition(char fields[5]);
 };
 
 #endif
